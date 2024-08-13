@@ -17,3 +17,4 @@ tesseract /home/jw/data/ocrdata/test/메뉴1.jpg out -l eng+kor --tessdata-dir .
 
 tesseract /home/jw/data/ocrdata/test/화장품/화장품_10.jpg out -l eng+kor --tessdata-dir ./tessdata  --oem 1 --psm 8
 ```
+
