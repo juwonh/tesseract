@@ -147,7 +147,7 @@ def extract_bbox(imfile,type): # post-process CRAFT to write text bbox images
         cropped_image_path = outpath + '/' + imname + '_' + f"{i+1:03}" + ext
         cropped_image.save(cropped_image_path)
 
-extract_bbox('/home/jw/data/test/1/report.png', '_box')
+# extract_bbox('/home/jw/data/test/1/report.png', '_box')
 
 def extract_bbox_folder(directory):
     entries = os.listdir(directory)

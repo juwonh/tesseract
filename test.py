@@ -1,9 +1,7 @@
 import pytesseract
-import numpy as np
 import cv2
 import os
-
-from PIL import Image
+import time
 
 
 # config_tesseract = '--tessdata-dir ./tessdata --psm 7'
@@ -11,8 +9,8 @@ from PIL import Image
 
 def runTesseract(imfile, conf):
   img = cv2.imread(imfile)
-  rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-  text = pytesseract.image_to_string(rgb, lang='kor+eng', config=conf )
+  # rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+  text = pytesseract.image_to_string(img, lang='kor+eng', config=conf )
   # print(text)
   return(text[:-2])
 
@@ -26,13 +24,14 @@ def runTesseract(imfile, conf):
 ###
 # directory에 있는 CRAFT bbox image들을 줄, 단락으로 나누어 runTesseract로 문자 추출한다
 ###
-def runDirectory(directory):
+def runTessWords(directory,conf):
   if(directory[-1] == '/'):
     directory = directory[:-1]
   folder = os.path.dirname(directory)
   name = os.path.basename(directory)
   boxfile = folder + '/CRAFT/' + name + '.txt'
   print(boxfile)
+  start_time = time.time()
 
   with open(boxfile, 'r', encoding='utf-8') as f:
     lines = [' '.join(l.strip().split()) for l in f]        
@@ -40,6 +39,7 @@ def runDirectory(directory):
   entries = os.listdir(directory)
   files = [entry for entry in entries if os.path.isfile(os.path.join(directory, entry))]
   files.sort()
+  # print(files)
 
   line0 = 1
   para0 = 1
@@ -53,15 +53,31 @@ def runDirectory(directory):
         fo.write("\n")
       if(para > para0):
         fo.write("\n")
-      text = runTesseract(directory+'/'+files[i], '--tessdata-dir ./tessdata --psm 8')
+      text = runTesseract(directory+'/'+files[i], conf)
       fo.write("{} ".format(text))
 
       line0 = line
-      para0 = para
+      para0 = para      
 
-      
+  end_time = time.time()
+  duration = end_time - start_time
+  print(f"Processing time: {duration:.3f} seconds")
    
-runDirectory('/home/jw/data/test/1/report_box/')
+runTessWords('/home/jw/data/test/1/report_line/','--tessdata-dir ./tessdata --psm 7')
+runTessWords('/home/jw/data/test/1/report_box/','--tessdata-dir ./tessdata --psm 8')
+
+
+
+def runTessPage(imfile):
+  start_time = time.time()
+  with open('./out.txt', 'w', encoding='utf-8') as fo:
+    text = runTesseract(imfile, '--tessdata-dir ./tessdata --psm 3')
+    fo.write("{} ".format(text))
+  end_time = time.time()
+  duration = end_time - start_time
+  print(f"Processing time: {duration:.3f} seconds")
+
+# runTessPage('/home/jw/data/test/1/newsm.jpg')
 
 # from pytesseract import Output
 def bounding_box(result, img, i, color = (255,100,0)):
