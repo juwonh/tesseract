@@ -15,7 +15,18 @@ pip install opencv-python
 ```
 ### tesseract 돌리기
 ```
-tesseract /home/jw/data/ocrdata/test/메뉴1.jpg out -l eng+kor --tessdata-dir ./tessdata --oem 1 --psm 11
+한줄일 경우:
+tesseract /home/jw/data/test/1/news_line/news_2.png out -l kor --tessdata-dir ./tessdata --psm 7
+
+tesseract /home/jw/data/test/1/newsm_line/newsm_1.jpg out -l kor --tessdata-dir ./tessdata --psm 7
+
+언어가 두 개 이상일 경우 정확도 떨어짐:
+tesseract /home/jw/data/test/1/report_line/report_2.png out -l kor+eng --tessdata-dir ./tessdata --psm 7
+
+한 단어일 경우
+tesseract /home/jw/data/test/1/news_box/news_1.png out -l kor --tessdata-dir ./tessdata  --psm 8
+
+tesseract /home/jw/data/test/1/report_box/report_4.png out -l kor+eng --tessdata-dir ./tessdata --psm 8
 
 tesseract /home/jw/data/ocrdata/test/화장품/화장품_10.jpg out -l eng+kor --tessdata-dir ./tessdata  --oem 1 --psm 8
 ```

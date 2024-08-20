@@ -1,41 +1,32 @@
-YERINA MOISTURE PEELING GEL HERB
-예 리 나 모이스춰 필링젤 허브
+황보주원 업무일지 2024.8.5 
 
- 
+pytorch 기반 deep learning architecture 학습 
+pytorche 연구 논문들에서 구현된 모델 및 알고리즘들이 아주잘제공됨. 
 
-예 리 나 모이스춰 필 링 젤 은 피 부 의 묵은 각 질 을
-제거해 매끄럽고 건강한 피 부 로 가꾸어 줍니다.
+pytorch transformer 를 활용한 자연어 처리 알고리즘 구현 
+tokenizer VocabularyS 숫자로 변환 
+embedding 문장을 matrix2 만듬 
+encoder/decoder 텍스트를 벡터로 / 벡터를 텍스트로 
 
- 
+Vision diffusion model VAE (Variational Autoencoder)s, GAN(Generative Adversarial 
+Network) 구현 
+사람 얼굴인지 아닌지 판별하기 위해 학습을 통해 사람 얼굴 모양의 특성을 추출함 
 
-BASEN 주 1~2 회 정도 세안 후 피 부 에 물 기 가 없는 상 태 에서 적 당 랑 을
+50 
+50 0 50 
 
-et aes eee go 하듯
-baal Bud 각 질 이 밀 려 나 오기 ae 럽게 몰 링 하면서 woe
-정도 마사지 해주고 미 온 수로 깨끗이 2210} LIC,
+Ollama 
+Ollama= 사용하여 메타 llamas 비롯한 수많은 opensource LLME 무료로 내 ㅠㅁ(ㄷ에서 실행할 수 
+있음 기존 06ㄷ로는 가장 저사양 80억개 parameter (568) 모델만 돌릴 수 있음 품질의 차이가 있음 
+적어도 줌사양 700억개 perameter (4068), 고사양 4000억개 parameter 모델이 되어야 
+chatGPTO| 비슷해짐. 
 
-케 전 성분 정 제 수, 셀룰로오스, 부 틸 렌 글 라 이 콜 , 에탄올, 라 벤 더 추 충 뭉
-베 르 가 못 잎 추출물, 페 퍼 민 트 위 추 출 물 , 프 리 지 어 추출물, 캐 모 마 일 꽃 추 충 운
-로 즈 마 리 임 추출물, 세 트 리 모 늄 클 로 라이드, 알 지 닌 , 카 보 머 , 하 이 드 록시
-이 세 토 퍼 논 테 트 라 소 늄 이 디 티 에 이, 향료
+RAG (Retrieval Augmented Generation) 
+domain-specific 문서를 학습시킴으로써 작은 SLM 활용하여 문제의 해답을 추출해서 제공 가능 
 
-룰 사 용 상 의 주 의 사항 1 화 장 품 시 용 시 또 는 사용 후 직 사 광 선 에 의 히어
-부가 붉은 반점, 부 어 오름 또는 가려움증 등 의 이상 Saou
-부 작 용 이 있는 경우 전 문 의 등과 상 담 할 Zi 2 AA} be wo} Ei
-sg nt 14 em 및 취 급 시 의 주 의 사함 FOL A SAGE
-곳 에 보관할 것 2) 직 사 광 선 을 피해서 보관할 것
-본 제 품 에 이상미 있을 경우 공 정 거 래 위원회 고시 소비자 —
-분 쟁 하 결 기 준 에 의 거 교 환 또는 보상 받을수 있습니다.
-
-20 5-H =
-——_o
-
-자 =
-
-3 량 400 ~. =
-제 조 번 호 / 사 용 기 한 별 도 표시 & >
-a a —
-:
-
-Sd MAAL+621 9 oe
-
+Langchain 
+LLM 모델은 openAl chatGPT. Anthropic Claude, Meta LLama google Gemma Mistral, Phi 등 
+1년에 2번 정도 획기적인 update= 함. 새로운 모델이 출시될 때마다 성능은 좋아지고 비용은 
+술어듬. 여러 시 플랫폼들의 APIS 골라쓸 수 있는 시대임. 
+Langchaing 통하여 API [만0010라를 손쉽게 관리하며 일관적인 서비스를 Hag 수 있음 
+모델 티ㅁ26-40008도 가능 
