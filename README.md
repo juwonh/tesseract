@@ -13,7 +13,16 @@ pip install pytesseract
 pip install numpy
 pip install opencv-python
 ```
-### tesseract 돌리기
+### 이미지 bbox 제작 <bbox.py>
+```
+sort_bbox_folder('/home/jw/data/test/2/CRAFT') 돌린 후
+extract_bbox_folder('/home/jw/data/test/2/') 돌림
+```
+### tesseract 돌리기 <test.py>
+```
+runTessWords(imfile, conf)
+```
+command line interface
 ```
 한줄일 경우:
 tesseract /home/jw/data/test/1/news_line/news_2.png out -l kor --tessdata-dir ./tessdata --psm 7

@@ -34,7 +34,7 @@ def sort_bbox(infile):
     
   py_ave /= num_box
   print(f"average line height: {py_ave:.0f} pixels")
-  thresh = py_ave/2
+  thresh = py_ave
   
   ## sorted_box contains boxes sorted by y-coordinate, then x-coordinate
   sorted_box = sorted(boxes, key=lambda pair: (pair[2], pair[1]))
@@ -58,7 +58,6 @@ def sort_bbox(infile):
   ## Now print out the sorted bbox list as new boxfile
   line_id = 1
   block_id = 1
-  index = sorted_box_final[0][0]  
   xmin_0 = sorted_box_final[0][1]
   ymin_0 = sorted_box_final[0][2]
   xmax_0 = sorted_box_final[0][3]
@@ -67,11 +66,11 @@ def sort_bbox(infile):
   with open(outfile2, 'w', encoding='utf-8') as f2:
     with open(outfile, 'w', encoding='utf-8') as fo:
       for i in range(num_box):
-        index = sorted_box_final[i][0]  
         xmin = sorted_box_final[i][1]
         ymin = sorted_box_final[i][2]
         xmax = sorted_box_final[i][3]
         ymax = sorted_box_final[i][4]
+        height = ymax - ymin
         if( ymin - ymin_0 > thresh ):
           f2.write("{},{},{},{},{},{}\n".format(line_id,block_id,xmin_0,ymin_0,xmax_0,ymax_0))  
           line_id += 1
@@ -82,7 +81,7 @@ def sort_bbox(infile):
           xmin_0 = xmin
           xmax_0 = xmax
         else:
-          if(xmin - xmax_0 < thresh*2):
+          if(xmin - xmax_0 < height):
             if(ymax_0 < ymax):
               ymax_0 = ymax
             xmax_0 = xmax
@@ -96,7 +95,7 @@ def sort_bbox(infile):
         fo.write("{},{},{},{},{},{}\n".format(line_id,block_id,xmin,ymin,xmax,ymax))        
       f2.write("{},{},{},{},{},{}\n".format(line_id,block_id,xmin_0,ymin_0,xmax_0,ymax_0)) 
 
-# sort_bbox('/home/jw/data/test/1/CRAFT/report.txt')
+# sort_bbox('/home/jw/data/test/2/CRAFT/pill2.txt')
 
 ### 
 # find all .txt files in the given directory and run sort_bbox(craftfile)
@@ -105,11 +104,12 @@ def sort_bbox_folder(directory):
   for file in os.listdir(directory):
     if file.endswith('.txt'):
       if not file.endswith('box.txt'):
-        filepath = os.path.join(directory,file)
-        print(filepath)
-        sort_bbox(filepath)
+        if not file.endswith('line.txt'):
+          filepath = os.path.join(directory,file)
+          print(filepath)
+          sort_bbox(filepath)
 
-# sort_bbox_folder('/home/jw/data/test/1/CRAFT')
+# sort_bbox_folder('/home/jw/data/test/2/CRAFT')
    
 ###
 # imfile: image file
@@ -120,8 +120,8 @@ def sort_bbox_folder(directory):
 def extract_bbox(imfile,type): # post-process CRAFT to write text bbox images
     folder = os.path.dirname(imfile)
     imname, ext = os.path.splitext(os.path.basename(imfile))
-    outpath = folder + '/' + imname + type + '/'
-    boxfile = folder + '/CRAFT/' + imname + type + '.txt'
+    outpath = folder + '/' + imname +'/' + type + '/'
+    boxfile = folder + '/CRAFT/' + imname + '_' + type + '.txt'
     # print(ext)
     # print(boxfile)
     try:
@@ -147,14 +147,15 @@ def extract_bbox(imfile,type): # post-process CRAFT to write text bbox images
         cropped_image_path = outpath + '/' + imname + '_' + f"{i+1:03}" + ext
         cropped_image.save(cropped_image_path)
 
-# extract_bbox('/home/jw/data/test/1/report.png', '_box')
+extract_bbox('/home/jw/data/test/2/pill2.jpg', 'line')
+extract_bbox('/home/jw/data/test/2/pill2.jpg', 'box')
 
 def extract_bbox_folder(directory):
     entries = os.listdir(directory)
     files = [entry for entry in entries if os.path.isfile(os.path.join(directory, entry))]
     for file in files:
         print(file)
-        extract_bbox(directory+'/'+file, '_line')
-        extract_bbox(directory+'/'+file, '_box')
+        extract_bbox(directory+'/'+file, 'line')
+        extract_bbox(directory+'/'+file, 'box')
         
-# extract_bbox_folder('/home/jw/data/test/1/')
+# extract_bbox_folder('/home/jw/data/test/2/')

@@ -1,32 +1,17 @@
-황보주원 업무일지 2024.8.5 
-
-0\아다) 기반 0660163『ㅁ08 하다1(6아나6 학습 
-2\/아다)는 연구 논문들에서 구현된 모델 및 알고리즘들이 아주 잘 제공됨. 
-
-pytorch transformers 28% X10 X2| ¢12|F 78 
-tokenizer : VocabularyS $A} 2 Het 
-embedding : £2 matrixZ IS 
-60600하/066006「:텍스트를 벡터로 /벡터를 텍스트로 
-
-Vision diffusion model : VAE(Variational Autoencoder)s , GAN(Generative Adversarial 
-Network) 7% 
-사람 얼굴인지 아닌지 판별하기 위해 학습을 통해 사람 얼굴 모양의 특성을 추출함 
-
-50 
-50 0 50 
-
-Ollama 
-인!3003를 사용하여 메타 !!3003를 비롯한 수많은 0060ㅁ504『66ㄴㄴ4을 무료로 내 8( 에서 실행할 수 
-있음.기존 6<로는 가장 저사양 80억개ㅎ330라한 (568) 모델만 돌릴 수 있음.품질의 차이가 있음 
-Ho ZAI 7004 7H perameter (40GB), DAY 40004 7H parameter 2 E0| | 0{0F 
-다|]3.607에 비슷해짐. 
-
-RAG (Retrieval Augmented Generation) 
-900131ㅁ-5060106문서를 학습시킴으로써 작은 5[14을 활용하여 문제의 해답을 추출해서 제공 가능 
-
-Langchain 
-LLM 222 openAl chatGPT, Anthropic Claude, Meta LLama, google Gemma, Mistral, Phi S 
-1년에 2번 정도 획기적인 4003*6를 함. 새로운 모델이 출시될 때마다 성능은 좋아지고 비용은 
-술어듬. 여러 시 플랫폼들의 ^미를 골라쓸 수 있는 시대임. 
-Langchain2 S610 API providers 2H 22/50 Y24=QI MH|AS HIE 수 있음 
-2H Fine-tuning® 7t5 
+일 
+누108908내키006 대자 
+핀로비이 
+ 
+스가 하느본 밸기가  
+니바사노 : 
+ 
+ 
+ 
+  
+[00 %) 비타민 700 [906(100 %) 비타민811공 
+ 
+ 
+2 우가 버비아서할 
+ 
+이 08 
+ 

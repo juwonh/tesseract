@@ -10,7 +10,7 @@ import time
 def runTesseract(imfile, conf):
   img = cv2.imread(imfile)
   # rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-  text = pytesseract.image_to_string(img, lang='kor+eng', config=conf )
+  text = pytesseract.image_to_string(img, lang='kor', config=conf )
   # print(text)
   return(text[:-2])
 
@@ -28,8 +28,12 @@ def runTessWords(directory,conf):
   if(directory[-1] == '/'):
     directory = directory[:-1]
   folder = os.path.dirname(directory)
-  name = os.path.basename(directory)
-  boxfile = folder + '/CRAFT/' + name + '.txt'
+  type = os.path.basename(directory)
+  name = os.path.basename(folder)
+  root = os.path.dirname(folder)
+  print(type)
+  print(name)
+  boxfile = root + '/CRAFT/' + name + '_' + type + '.txt'
   print(boxfile)
   start_time = time.time()
 
@@ -63,8 +67,8 @@ def runTessWords(directory,conf):
   duration = end_time - start_time
   print(f"Processing time: {duration:.3f} seconds")
    
-runTessWords('/home/jw/data/test/1/report_line/','--tessdata-dir ./tessdata --psm 7')
-runTessWords('/home/jw/data/test/1/report_box/','--tessdata-dir ./tessdata --psm 8')
+runTessWords('/home/jw/data/test/2/pill1/line/','--tessdata-dir ./tessdata --psm 7')
+#runTessWords('/home/jw/data/test/2/pill2/box/','--tessdata-dir ./tessdata --psm 8')
 
 
 
