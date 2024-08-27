@@ -9,7 +9,7 @@ import os
 def sort_bbox(infile):  
   folder = os.path.dirname(infile)
   filename, txt = os.path.splitext(os.path.basename(infile))  
-  outfile = folder + '/' + filename + '_box' + txt     
+  outfile1 = folder + '/' + filename + '_box' + txt     
   outfile2 = folder + '/' + filename + '_line' + txt      
 
   with open(infile, 'r', encoding='utf-8') as f:
@@ -29,7 +29,7 @@ def sort_bbox(infile):
     ymax = max(int(xy[5]), int(xy[7]))
     py = ymax-ymin
     py_ave += py
-    boxes.append([i, xmin, ymin, xmax, ymax])       
+    boxes.append([i, xmin, ymin, xmax, ymax,xy[0],xy[1],xy[2],xy[3],xy[4],xy[5],xy[6],xy[7]])       
   # print(boxes)
     
   py_ave /= num_box
@@ -45,7 +45,7 @@ def sort_bbox(infile):
   # print(y0)
   for i in range(num_box):
     ymin = sorted_box[i][2]
-    if( ymin - ymin_0 < thresh ):
+    if( ymin - ymin_0 < thresh*0.5 ):
       sorted_box[i][2] = ymin_0
     else:
       ymin_0 = ymin
@@ -53,7 +53,11 @@ def sort_bbox(infile):
 
   ## sorted_box_final is sorted based on x coordinates of each line
   sorted_box_final = sorted(sorted_box, key=lambda pair: (pair[2], pair[1]))
-  # print(sorted_box_final)
+  with open('./test.txt', 'w', encoding='utf-8') as f2:
+    for i in range(num_box):
+       xy = sorted_box_final[i]
+       f2.write("{},{},{},{},{},{},{},{},{},{},{},{},{}\n".format(
+         xy[0],xy[1],xy[2], xy[3], xy[4], xy[5],xy[6],xy[7],xy[8],xy[9],xy[10],xy[11],xy[12]))  
 
   ## Now print out the sorted bbox list as new boxfile
   line_id = 1
@@ -64,38 +68,62 @@ def sort_bbox(infile):
   ymax_0 = sorted_box_final[0][4]
 
   with open(outfile2, 'w', encoding='utf-8') as f2:
-    with open(outfile, 'w', encoding='utf-8') as fo:
+    with open(outfile1, 'w', encoding='utf-8') as f1:
       for i in range(num_box):
+        id = sorted_box_final[i][0]
         xmin = sorted_box_final[i][1]
         ymin = sorted_box_final[i][2]
         xmax = sorted_box_final[i][3]
         ymax = sorted_box_final[i][4]
+        xy = sorted_box_final[i]
         height = ymax - ymin
-        if( ymin - ymin_0 > thresh ):
-          f2.write("{},{},{},{},{},{}\n".format(line_id,block_id,xmin_0,ymin_0,xmax_0,ymax_0))  
+        # if i == 41:
+        #    print(id)
+        #    print(height)
+        #    print("{},{},{},{},{}\n".format(id, ymin_0, ymax_0, ymin, ymax))  
+        
+        
+        if( ymin - ymin_0 > height*0.5 ):
           line_id += 1
-          if( ymin - ymax_0 > thresh*2):
-            block_id += 1
+          if( ymin - ymax_0 > height*0.5):
+            block_id += 1            
+          f2.write("{},{},{},{},{},{},{},{},{},{},{}\n".format(
+            id,line_id,block_id,xmin_0,ymin_0,xmax_0,ymin_0,xmax_0,ymax_0,xmin_0,ymax_0))  
+          
           ymin_0 = ymin
           ymax_0 = ymax 
           xmin_0 = xmin
           xmax_0 = xmax
+
         else:
-          if(xmin - xmax_0 < height):
-            if(ymax_0 < ymax):
-              ymax_0 = ymax
-            xmax_0 = xmax
+          if( xmin > xmin_0):
+            if(xmin - xmax_0 < height):
+              if(ymax_0 < ymax):
+                ymax_0 = ymax
+              xmax_0 = xmax
+            else:
+              f2.write("{},{},{},{},{},{},{},{},{},{},{}\n".format(
+                id,line_id,block_id,xmin_0,ymin_0,xmax_0,ymin_0,xmax_0,ymax_0,xmin_0,ymax_0))  
+              ymin_0 = ymin
+              ymax_0 = ymax 
+              xmin_0 = xmin
+              xmax_0 = xmax
           else:
-            f2.write("{},{},{},{},{},{}\n".format(line_id,block_id,xmin_0,ymin_0,xmax_0,ymax_0))  
+            f2.write("{},{},{},{},{},{},{},{},{},{},{}\n".format(
+              id,line_id,block_id,xmin_0,ymin_0,xmax_0,ymin_0,xmax_0,ymax_0,xmin_0,ymax_0))  
             ymin_0 = ymin
             ymax_0 = ymax 
             xmin_0 = xmin
             xmax_0 = xmax
         
-        fo.write("{},{},{},{},{},{}\n".format(line_id,block_id,xmin,ymin,xmax,ymax))        
-      f2.write("{},{},{},{},{},{}\n".format(line_id,block_id,xmin_0,ymin_0,xmax_0,ymax_0)) 
+        f1.write("{},{},{},{},{},{},{},{},{},{},{}\n".format(
+          id,line_id,block_id,xy[5],xy[6],xy[7],xy[8],xy[9],xy[10],xy[11],xy[12]))  
+        
+        
+      f2.write("{},{},{},{},{},{},{},{},{},{},{}\n".format(
+        id,line_id,block_id,xmin_0,ymin_0,xmax_0,ymin_0,xmax_0,ymax_0,xmin_0,ymax_0)) 
 
-# sort_bbox('/home/jw/data/test/2/CRAFT/pill2.txt')
+sort_bbox('/home/jw/data/test/3/CRAFT/gum_.txt')
 
 ### 
 # find all .txt files in the given directory and run sort_bbox(craftfile)
@@ -109,7 +137,7 @@ def sort_bbox_folder(directory):
           print(filepath)
           sort_bbox(filepath)
 
-# sort_bbox_folder('/home/jw/data/test/2/CRAFT')
+# sort_bbox_folder('/home/jw/data/test/3/CRAFT')
    
 ###
 # imfile: image file
@@ -136,26 +164,27 @@ def extract_bbox(imfile,type): # post-process CRAFT to write text bbox images
     num_box = len(lines)
     for i, l in enumerate(lines):
         xy = l.split(',')
-        xmin = int(xy[2])
-        xmax = int(xy[4])
-        ymin = int(xy[3])
-        ymax = int(xy[5])
- 
+        xmin = min(int(xy[3]), int(xy[9]))  
+        xmax = max(int(xy[5]), int(xy[7]))
+        ymin = min(int(xy[4]), int(xy[6]))
+        ymax = max(int(xy[8]), int(xy[10]))
+    
         crop_box = (xmin, ymin, xmax, ymax)
         # print(crop_box)
         cropped_image = im.crop(crop_box)
         cropped_image_path = outpath + '/' + imname + '_' + f"{i+1:03}" + ext
         cropped_image.save(cropped_image_path)
 
-extract_bbox('/home/jw/data/test/2/pill2.jpg', 'line')
-extract_bbox('/home/jw/data/test/2/pill2.jpg', 'box')
+
+extract_bbox('/home/jw/data/test/3/gum_.jpg', 'box')
+extract_bbox('/home/jw/data/test/3/gum_.jpg', 'line')
 
 def extract_bbox_folder(directory):
     entries = os.listdir(directory)
     files = [entry for entry in entries if os.path.isfile(os.path.join(directory, entry))]
     for file in files:
         print(file)
-        extract_bbox(directory+'/'+file, 'line')
         extract_bbox(directory+'/'+file, 'box')
+        extract_bbox(directory+'/'+file, 'line')
         
-# extract_bbox_folder('/home/jw/data/test/2/')
+# extract_bbox_folder('/home/jw/data/test/3/')

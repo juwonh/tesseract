@@ -31,8 +31,8 @@ def runTessWords(directory,conf):
   type = os.path.basename(directory)
   name = os.path.basename(folder)
   root = os.path.dirname(folder)
-  print(type)
-  print(name)
+  # print(type)
+  # print(name)
   boxfile = root + '/CRAFT/' + name + '_' + type + '.txt'
   print(boxfile)
   start_time = time.time()
@@ -47,7 +47,7 @@ def runTessWords(directory,conf):
 
   line0 = 1
   para0 = 1
-  with open('./out.txt', 'w', encoding='utf-8') as fo:
+  with open('./out.txt', 'a', encoding='utf-8') as fo:
     for i, l in enumerate(lines):
       xy = l.split(',')
       line = int(xy[0])
@@ -63,12 +63,13 @@ def runTessWords(directory,conf):
       line0 = line
       para0 = para      
 
-  end_time = time.time()
-  duration = end_time - start_time
-  print(f"Processing time: {duration:.3f} seconds")
+    end_time = time.time()
+    duration = end_time - start_time
+    print(f"***Processing time: {duration:.1f} seconds")
+    fo.write(f"\n***Processing time: {duration:.1f} seconds\n\n")
    
-runTessWords('/home/jw/data/test/2/pill1/line/','--tessdata-dir ./tessdata --psm 7')
-#runTessWords('/home/jw/data/test/2/pill2/box/','--tessdata-dir ./tessdata --psm 8')
+runTessWords('/home/jw/data/test/2/drink/line/','--tessdata-dir ./tessdata --psm 7')
+runTessWords('/home/jw/data/test/2/drink/box/','--tessdata-dir ./tessdata --psm 8')
 
 
 
