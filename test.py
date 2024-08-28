@@ -50,8 +50,8 @@ def runTessWords(directory,conf):
   with open('./out.txt', 'a', encoding='utf-8') as fo:
     for i, l in enumerate(lines):
       xy = l.split(',')
-      line = int(xy[0])
-      para = int(xy[1])
+      line = int(xy[1])
+      para = int(xy[2])
       
       if(line > line0):
         fo.write("\n")
@@ -68,8 +68,8 @@ def runTessWords(directory,conf):
     print(f"***Processing time: {duration:.1f} seconds")
     fo.write(f"\n***Processing time: {duration:.1f} seconds\n\n")
    
-runTessWords('/home/jw/data/test/2/drink/line/','--tessdata-dir ./tessdata --psm 7')
-runTessWords('/home/jw/data/test/2/drink/box/','--tessdata-dir ./tessdata --psm 8')
+# runTessWords('/home/jw/data/test/3/drink/line/','--tessdata-dir ./tessdata --psm 7')
+runTessWords('/home/jw/data/test/3/pill2_/box/','--tessdata-dir ./tessdata --psm 8')
 
 
 

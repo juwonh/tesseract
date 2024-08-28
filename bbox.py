@@ -123,7 +123,7 @@ def sort_bbox(infile):
       f2.write("{},{},{},{},{},{},{},{},{},{},{}\n".format(
         id,line_id,block_id,xmin_0,ymin_0,xmax_0,ymin_0,xmax_0,ymax_0,xmin_0,ymax_0)) 
 
-sort_bbox('/home/jw/data/test/3/CRAFT/gum_.txt')
+# sort_bbox('/home/jw/data/test/3/CRAFT/pill2_.txt')
 
 ### 
 # find all .txt files in the given directory and run sort_bbox(craftfile)
@@ -176,8 +176,8 @@ def extract_bbox(imfile,type): # post-process CRAFT to write text bbox images
         cropped_image.save(cropped_image_path)
 
 
-extract_bbox('/home/jw/data/test/3/gum_.jpg', 'box')
-extract_bbox('/home/jw/data/test/3/gum_.jpg', 'line')
+extract_bbox('/home/jw/data/test/3/pill2_.jpg', 'box')
+# extract_bbox('/home/jw/data/test/3/pill2_.jpg', 'line')
 
 def extract_bbox_folder(directory):
     entries = os.listdir(directory)
